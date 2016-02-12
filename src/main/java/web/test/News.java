@@ -8,71 +8,66 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- * Created by fedosovmax on 11.02.16.
- */
+
 @Entity
 @Table(name = "NEWS")
 public class News implements Serializable {
+    private static final long serialVersionUID = -5527566248002296042L;
 
+    @Id
+    @Column(name = "ID_NEWS")
+    @GeneratedValue
+    private Integer idNews;
 
-        private static final long serialVersionUID = -5527566248002296042L;
+    @Column(name = "NAME")
+    private String name;
 
-        @Id
-        @Column(name = "ID_NEWS")
-        @GeneratedValue
-        private Integer idNews;
+    @Column(name = "BODY")
+    private String body;
 
-        @Column(name = "NAME")
-        private String name;
+    @Column(name = "PUTDATE")
+    private Date putdate;
 
-        @Column(name = "BODY")
-        private String body;
+    public Integer getIdNews() {
+        return idNews;
+    }
 
-        @Column(name = "PUTDATE")
-        private Date putdate;
+    public void setId(Integer idNews) {
+        this.idNews = idNews;
+    }
 
-        public Integer getIdNews() {
-            return idNews;
-        }
+    public String getName() {
+        return name;
+    }
 
-        public void setId(Integer idNews) {
-            this.idNews = idNews;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public String getName() {
-            return name;
-        }
+    public String getBody() {
+        return body;
+    }
 
-        public void setName(String name) {
-            this.name = name;
-        }
+    public void setBody(String body) {
+        this.body = body;
+    }
 
-        public String getBody() {
-            return body;
-        }
+    public Date getPutdate() {
+        return putdate;
+    }
 
-        public void setBody(String body) {
-            this.body = body;
-        }
+    public void setPutdate(Date putdate) {
+        this.putdate = putdate;
+    }
 
-        public Date getPutdate() {
-            return putdate;
-        }
-
-        public void setPutdate(Date putdate) {
-            this.putdate = putdate;
-        }
-        @Override
-        public String toString() {
+    @Override
+    public String toString() {
         return
                 "body='" + body + '\'' +
-                ", idNews=" + idNews +
-                ", name='" + name + '\'' +
-                ", putdate=" + putdate
+                        ", idNews=" + idNews +
+                        ", name='" + name + '\'' +
+                        ", putdate=" + putdate
                 ;
-         }
-
-
+    }
 }
 

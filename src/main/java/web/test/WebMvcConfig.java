@@ -9,10 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 
-
-/**
- * Created by fedosovmax on 11.02.16.
- */
 @Configuration
 @EnableAutoConfiguration
 public class WebMvcConfig {

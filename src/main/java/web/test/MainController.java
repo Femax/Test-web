@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
 import java.util.List;
 
-/**
- * Created by fedosovmax on 11.02.16.
- */
+
 @Controller
 public class MainController {
     @Autowired
