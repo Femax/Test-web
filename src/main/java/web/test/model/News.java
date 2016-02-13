@@ -1,4 +1,4 @@
-package web.test;
+package web.test.model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "NEWS")
 public class News implements Serializable {
@@ -17,7 +16,7 @@ public class News implements Serializable {
     @Id
     @Column(name = "ID_NEWS")
     @GeneratedValue
-    private Integer idNews;
+    private Long idNews;
 
     @Column(name = "NAME")
     private String name;
@@ -28,11 +27,22 @@ public class News implements Serializable {
     @Column(name = "PUTDATE")
     private Date putdate;
 
-    public Integer getIdNews() {
+    @Column(name = "CATEGORY")
+    private String category;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public Long getIdNews() {
         return idNews;
     }
 
-    public void setId(Integer idNews) {
+    public void setId(Long idNews) {
         this.idNews = idNews;
     }
 
