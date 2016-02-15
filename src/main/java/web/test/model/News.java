@@ -2,11 +2,8 @@ package web.test.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.Set;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "NEWS")
@@ -14,36 +11,45 @@ public class News implements Serializable {
     private static final long serialVersionUID = -5527566248002296042L;
 
     @Id
-    @Column(name = "ID_NEWS")
     @GeneratedValue
-    private Long idNews;
+    @Column(name="ID")
+    private Long id;
 
-    @Column(name = "NAME")
+
     private String name;
 
-    @Column(name = "BODY")
+
     private String body;
 
-    @Column(name = "PUTDATE")
+
     private Date putdate;
 
-    @Column(name = "CATEGORY")
-    private String category;
 
-    public String getCategory() {
-        return category;
+
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "news_category", catalog = "", joinColumns = {
+            @JoinColumn(name = "NEWS_ID", nullable = false, updatable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "CATEGORY_ID",
+                    nullable = false, updatable = false) })
+    private Set<Category> categories;
+
+
+    public Set<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 
-    public Long getIdNews() {
-        return idNews;
+
+    public Long getId() {
+        return id;
     }
 
-    public void setId(Long idNews) {
-        this.idNews = idNews;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -74,10 +80,19 @@ public class News implements Serializable {
     public String toString() {
         return
                 "body='" + body + '\'' +
-                        ", idNews=" + idNews +
+                        ", idNews=" + id +
                         ", name='" + name + '\'' +
                         ", putdate=" + putdate
                 ;
+    }
+
+    public NewsDTO toDTO(){
+        NewsDTO newsDTO = new NewsDTO();
+        newsDTO.setIdNews(this.id);
+        newsDTO.setName(this.name);
+        newsDTO.setBody(this.body);
+        newsDTO.setPutdate(this.putdate);
+        return newsDTO;
     }
 }
 

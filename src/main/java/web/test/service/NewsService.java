@@ -1,13 +1,19 @@
 package web.test.service;
 
+import web.test.model.Category;
 import web.test.model.News;
+import web.test.model.NewsDTO;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public interface NewsService {
-    List<News> findNews(String category);
+    List<NewsDTO> findNews(String category);
 
-    News getNews(Long id);
+    NewsDTO getNews(Long id);
 
-    void save(Long id_news,String name,String body,String category,Date putdate);
+    void save(String name,String body,Category category,Date putdate);
+
+    void delete(String name);
 }

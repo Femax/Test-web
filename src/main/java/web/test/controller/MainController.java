@@ -6,10 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import web.test.model.Category;
 import web.test.model.News;
 
+import web.test.model.NewsDTO;
 import web.test.service.NewsService;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -21,7 +25,7 @@ public class MainController {
     @RequestMapping(path = "/index")
     public String index(Model model) {
 
-        List<News> news = this.newsService.findNews("IT");
+        List<NewsDTO> news = this.newsService.findNews("IT");
 
         model.addAttribute("news", news);
         return "index";
@@ -30,7 +34,7 @@ public class MainController {
     @RequestMapping(value = "/news", method = RequestMethod.GET)
     public String getPersons(Model model) {
 
-        List<News> news = this.newsService.findNews("IT");
+        List<NewsDTO> news = this.newsService.findNews("IT");
 
         model.addAttribute("news", news);
 
@@ -45,11 +49,15 @@ public class MainController {
         return "addnews";
     }
 
-    @RequestMapping(value = "/persons/add", method = RequestMethod.POST)
-    public String add(@ModelAttribute("newsAttribute") News news) {
-
-        this.newsService.save(news.getIdNews(), news.getName(), news.getBody(), news.getCategory(), news.getPutdate());
-
+    @RequestMapping(value = "/news/add", method = RequestMethod.POST)
+    public String add(@RequestParam(value = "name", required = false) String name,@RequestParam(value = "body", required = false) String body,@RequestParam(value = "category", required = false) String category,@RequestParam(value = "putdate", required = false) Date putdate,Model model) {
+//        Category category1 = new Category();
+//        .category1.setCategory(category);
+//        this.newsService.save(name, body, category1, putdate);
+//        model.addAttribute("name", name);
+//        model.addAttribute("body",body);
+//        model.addAttribute("category",category);
+//        model.addAttribute("putdate",putdate);
         return "addednews";
     }
 }

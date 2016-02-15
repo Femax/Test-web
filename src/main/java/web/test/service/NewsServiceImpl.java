@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import web.test.dao.NewsRepository;
+import web.test.model.Category;
 import web.test.model.News;
+import web.test.model.NewsDTO;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,30 +33,40 @@ public class NewsServiceImpl implements NewsService {
 
 
     @Override
-    public List<News> findNews(String category) {
+    public List<NewsDTO> findNews(String category) {
         Assert.notNull(category, "Criteria must not be null");
-     return this.newsRepository.findByCategory(category);
+        List<News> news =this.newsRepository.findByCategory(category);
+        List<NewsDTO> newsDTO = new ArrayList<>();
+        for (News curNews:news){
+            newsDTO.add(curNews.toDTO());
+        }
+     return newsDTO;
     }
 
 
 
     @Override
-    public News getNews(Long id) {
+    public NewsDTO getNews(Long id) {
         Assert.notNull(id, "Criteria must not be null");
-
-        return this.newsRepository.findOne(id);
+        News news = this.newsRepository.findOne(id);
+        NewsDTO newsDTO =news.toDTO();
+        return newsDTO ;
     }
 
 
 
     @Override
-    public void save(Long id_news, String name, String body, String category, Date putdate) {
+    public void save(String name, String body, Category category, Date putdate) {
         News news = new News();
-        news.setId(id_news);
         news.setName(name);
         news.setBody(body);
-        news.setCategory(category);
+       // news.setCategory(category);
         news.setPutdate(putdate);
+        this.newsRepository.save(news);
+    }
+
+    @Override
+    public void delete(String name){
 
     }
 }
