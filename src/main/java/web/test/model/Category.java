@@ -40,4 +40,11 @@ public class Category implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public CategoryDTO toDTO(){
+        CategoryDTO categoryDTO = new CategoryDTO();
+        categoryDTO.setName(this.name);
+        categoryDTO.setId(this.id);
+        return categoryDTO;
+    }
 }

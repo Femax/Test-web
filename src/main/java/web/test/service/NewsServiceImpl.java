@@ -3,6 +3,7 @@ package web.test.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
+import web.test.dao.CategoryRepository;
 import web.test.dao.NewsRepository;
 import web.test.model.Category;
 import web.test.model.News;
@@ -12,10 +13,9 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
-/**
- * Created by fedosovmax on 14.02.16.
- */
+
 @Component("NewsService")
 @Transactional
 public class NewsServiceImpl implements NewsService {
@@ -23,19 +23,20 @@ public class NewsServiceImpl implements NewsService {
 
 
     private final   NewsRepository newsRepository;
-
+    private final CategoryRepository categoryRepository;
 
     @Autowired
-    public NewsServiceImpl(NewsRepository newsRepository) {
+    public NewsServiceImpl(NewsRepository newsRepository,CategoryRepository categoryRepository) {
         this.newsRepository = newsRepository;
+        this.categoryRepository = categoryRepository;
     }
 
 
 
     @Override
-    public List<NewsDTO> findNews(String category) {
+    public List<NewsDTO> findNewsByCategory(Category category) {
         Assert.notNull(category, "Criteria must not be null");
-        List<News> news =this.newsRepository.findByCategory(category);
+        List<News> news =this.newsRepository.getNewsByCategory(category.getId());
         List<NewsDTO> newsDTO = new ArrayList<>();
         for (News curNews:news){
             newsDTO.add(curNews.toDTO());
@@ -43,6 +44,15 @@ public class NewsServiceImpl implements NewsService {
      return newsDTO;
     }
 
+    @Override
+    public List<NewsDTO> findAll() {
+        List<News> news =this.newsRepository.findAll();
+        List<NewsDTO> newsDTO = new ArrayList<>();
+        for (News curNews:news){
+            newsDTO.add(curNews.toDTO());
+        }
+        return newsDTO;
+    }
 
 
     @Override
@@ -55,12 +65,13 @@ public class NewsServiceImpl implements NewsService {
 
 
 
+
     @Override
-    public void save(String name, String body, Category category, Date putdate) {
+    public void save(String name, String body, Set<Category> categories, Date putdate) {
         News news = new News();
         news.setName(name);
         news.setBody(body);
-       // news.setCategory(category);
+        news.setCategories(categories);
         news.setPutdate(putdate);
         this.newsRepository.save(news);
     }

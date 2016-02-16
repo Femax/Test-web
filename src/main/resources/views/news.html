@@ -52,7 +52,7 @@
 
     {% for new in news %}
     <div class="news-container" style="width:100%;box-shadow: 0 0 10px rgba(0,0,0,0.5);margin:20px;">
-        <h2 style="padding-top:15px;padding-left:10px;">{{new.name}} Category:{{new.category}}</h2>
+        <h2 style="padding-top:15px;padding-left:10px;">{{new.name}} Category:{% for category in new.categories %}{{category.name}},{% endfor %}</h2>
 
         <p style="padding:10px" >{{new.body}}<p/>
         <div class="date" style="text-align: right;padding-right:15px;">{{new.putdate}}</div>

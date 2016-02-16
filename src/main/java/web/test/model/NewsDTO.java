@@ -1,6 +1,7 @@
 package web.test.model;
 
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by fedosovmax on 15.02.16.
@@ -19,7 +20,7 @@ public class NewsDTO {
     private Date putdate;
 
 
-    private String category;
+    private Set<Category> categories;
 
     public Long getIdNews() {
         return idNews;
@@ -45,12 +46,12 @@ public class NewsDTO {
         this.name = name;
     }
 
-    public String getCategory() {
-        return category;
+    public Set<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 
     public String getBody() {

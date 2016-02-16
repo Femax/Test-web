@@ -91,6 +91,7 @@ public class News implements Serializable {
         newsDTO.setIdNews(this.id);
         newsDTO.setName(this.name);
         newsDTO.setBody(this.body);
+        newsDTO.setCategories(this.categories);
         newsDTO.setPutdate(this.putdate);
         return newsDTO;
     }
