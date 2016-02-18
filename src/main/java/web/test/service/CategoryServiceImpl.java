@@ -10,15 +10,14 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by fedosovmax on 16.02.16.
- */
+
 @Component("CategoryService")
 @Transactional
 public class CategoryServiceImpl implements CategoryService {
 
 
     private final CategoryRepository categoryRepository;
+
     @Autowired
     public CategoryServiceImpl(CategoryRepository categoryRepository) {
 
@@ -34,16 +33,16 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void delete(String name) {
-    Category category = new Category();
+        Category category = new Category();
         category.setName(name);
         categoryRepository.delete(category);
     }
 
     @Override
     public List<CategoryDTO> findCategories() {
-        List<Category> categories =  categoryRepository.findAll();
+        List<Category> categories = categoryRepository.findAll();
         List<CategoryDTO> categoriesDTO = new ArrayList<>();
-        for (Category category:categories){
+        for (Category category : categories) {
             categoriesDTO.add(category.toDTO());
         }
         return categoriesDTO;

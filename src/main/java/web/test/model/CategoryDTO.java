@@ -1,8 +1,6 @@
 package web.test.model;
 
-/**
- * Created by fedosovmax on 16.02.16.
- */
+
 public class CategoryDTO {
     private Long id;
 

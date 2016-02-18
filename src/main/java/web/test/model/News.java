@@ -12,7 +12,7 @@ public class News implements Serializable {
 
     @Id
     @GeneratedValue
-    @Column(name="ID")
+    @Column(name = "ID")
     private Long id;
 
 
@@ -25,13 +25,11 @@ public class News implements Serializable {
     private Date putdate;
 
 
-
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "news_category", catalog = "", joinColumns = {
-            @JoinColumn(name = "NEWS_ID", nullable = false, updatable = false) },
-            inverseJoinColumns = { @JoinColumn(name = "CATEGORY_ID",
-                    nullable = false, updatable = false) })
+            @JoinColumn(name = "NEWS_ID", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "CATEGORY_ID",
+                    nullable = false, updatable = false)})
     private Set<Category> categories;
 
 
@@ -86,13 +84,13 @@ public class News implements Serializable {
                 ;
     }
 
-    public NewsDTO toDTO(){
+    public NewsDTO toDTO() {
         NewsDTO newsDTO = new NewsDTO();
-        newsDTO.setIdNews(this.id);
-        newsDTO.setName(this.name);
-        newsDTO.setBody(this.body);
-        newsDTO.setCategories(this.categories);
-        newsDTO.setPutdate(this.putdate);
+        newsDTO.setIdNews(id);
+        newsDTO.setName(name);
+        newsDTO.setBody(body);
+        newsDTO.setPutdate(putdate);
+        newsDTO.setCategories(categories);
         return newsDTO;
     }
 }

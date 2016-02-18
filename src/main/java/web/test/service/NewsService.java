@@ -13,13 +13,18 @@ import java.util.List;
 import java.util.Set;
 
 public interface NewsService {
-    List<NewsDTO> findNewsByCategory(Category categories);
+    List<NewsDTO> findNewsByCategory(Long id);
 
     List<NewsDTO> findAll();
 
     NewsDTO getNews(Long id);
 
-    void save(String name,String body,Set<Category> categories,Date putdate);
+    void save(NewsDTO newsDTO);
 
-    void delete(String name);
+    void delete(Long Id);
+
+    public void addCategoryToNews(Long categoriesId, Long newsId);
+
+    public void update(NewsDTO newsDTO);
+
 }

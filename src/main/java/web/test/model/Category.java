@@ -3,14 +3,9 @@ package web.test.model;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
-/**
- * Created by fedosovmax on 15.02.16.
- */
+
+
 @Entity
 @Table(name = "CATEGORY")
 public class Category implements Serializable {
@@ -22,8 +17,6 @@ public class Category implements Serializable {
 
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
-    private List<News> news;
 
     public Long getId() {
         return id;

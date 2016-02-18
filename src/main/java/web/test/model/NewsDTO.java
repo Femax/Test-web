@@ -1,11 +1,10 @@
 package web.test.model;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
-/**
- * Created by fedosovmax on 15.02.16.
- */
+
 public class NewsDTO {
 
     private Long idNews;
@@ -19,8 +18,17 @@ public class NewsDTO {
 
     private Date putdate;
 
+    private List<Long> categoriesId;
 
     private Set<Category> categories;
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
 
     public Long getIdNews() {
         return idNews;
@@ -46,12 +54,12 @@ public class NewsDTO {
         this.name = name;
     }
 
-    public Set<Category> getCategories() {
-        return categories;
+    public List<Long> getCategoriesId() {
+        return categoriesId;
     }
 
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
+    public void setCategoriesId(List<Long> categoriesId) {
+        this.categoriesId = categoriesId;
     }
 
     public String getBody() {
