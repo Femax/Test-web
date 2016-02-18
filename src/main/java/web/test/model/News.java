@@ -12,7 +12,6 @@ public class News implements Serializable {
 
     @Id
     @GeneratedValue
-    @Column(name = "ID")
     private Long id;
 
 

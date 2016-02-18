@@ -53,9 +53,7 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public NewsDTO getNews(Long id) {
-        News news = newsRepository.findOne(id);
-        NewsDTO newsDTO = news.toDTO();
-        return newsDTO;
+        return newsRepository.findOne(id).toDTO();
     }
 
     @Override
@@ -70,15 +68,7 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public void save(NewsDTO newsDTO) {
         News news = new News();
-        news.setName(newsDTO.getName());
-        news.setBody(newsDTO.getBody());
-        news.setPutdate(newsDTO.getPutdate());
-        newsRepository.save(news);
-        news.setCategories(new HashSet<>());
-        for (Long id : newsDTO.getCategoriesId()) {
-            Category category = categoryRepository.findOne(id);
-            news.getCategories().add(category);
-        }
+        fromDTO(newsDTO,news);
         newsRepository.save(news);
 
     }
@@ -92,15 +82,19 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public void update(NewsDTO newsDTO) {
         News news = newsRepository.findOne(newsDTO.getIdNews());
-        news.setName(newsDTO.getName());
-        news.setBody(newsDTO.getBody());
-        Set<Category> categories = new HashSet<>();
-        for (Long id : newsDTO.getCategoriesId()) {
-            categories.add(categoryRepository.findOne(id));
-        }
-        news.setCategories(categories);
-        news.setPutdate(newsDTO.getPutdate());
+        fromDTO(newsDTO,news);
     }
 
+    public News fromDTO(NewsDTO newsDTO,News news){
+        news.setName(newsDTO.getName());
+        news.setBody(newsDTO.getBody());
+        news.setPutdate(newsDTO.getPutdate());
+        news.setCategories(new HashSet<>());
+        for (Long id : newsDTO.getCategoriesId()) {
+            Category category = categoryRepository.findOne(id);
+            news.getCategories().add(category);
+        }
+        return  news;
+    }
 
 }

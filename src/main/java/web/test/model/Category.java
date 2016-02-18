@@ -12,7 +12,6 @@ public class Category implements Serializable {
 
 
     @Id
-    @Column(name = "id")
     private Long id;
 
     private String name;

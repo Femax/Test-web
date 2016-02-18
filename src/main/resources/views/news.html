@@ -54,21 +54,12 @@
 </nav>
 <div class="content" style="width:80%;margin:0 auto;">
     <div class="btn-group" role="group" aria-label="">
+        {% for category in categories  %}
         <form action="/news" method="GET" role="form" class="form-horizontal">
-            <input type="hidden" name="category" value="1">
-            <button type="submit" class="btn btn-default">IT</button>
+            <input type="hidden" name="option{{category.id}}" value="{{category.id}}">
+            <button type="submit" class="btn btn-default">{{category.name}}</button>
         </form>
-
-        <form action="/news" method="GET" role="form" class="form-horizontal">
-            <input type="hidden" name="category" value="2">
-            <button type="submit" class="btn btn-default">Politic</button>
-        </form>
-
-        <form action="/news" method="GET" role="form" class="form-horizontal">
-            <input type="hidden" name="category" value="3">
-            <button type="submit" class="btn btn-default">Economic</button>
-        </form>
-
+        {% endfor %}
     </div>
 
     {% for new in news %}
