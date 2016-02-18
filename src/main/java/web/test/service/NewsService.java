@@ -25,6 +25,6 @@ public interface NewsService {
 
     public void addCategoryToNews(Long categoriesId, Long newsId);
 
-    public void update(NewsDTO newsDTO);
+
 
 }

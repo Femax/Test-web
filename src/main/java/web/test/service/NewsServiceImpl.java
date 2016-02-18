@@ -66,8 +66,12 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public void save(NewsDTO newsDTO) {
-        News news = new News();
-        fromDTO(newsDTO,news);
+        News news ;
+        if(newsDTO.getIdNews()!=null)
+         news = newsRepository.findOne(newsDTO.getIdNews());
+        else
+        news = new News();
+        news = fromDTO(newsDTO,news);
         newsRepository.save(news);
 
     }
@@ -78,11 +82,7 @@ public class NewsServiceImpl implements NewsService {
         newsRepository.delete(id);
     }
 
-    @Override
-    public void update(NewsDTO newsDTO) {
-        News news = newsRepository.findOne(newsDTO.getIdNews());
-        fromDTO(newsDTO,news);
-    }
+
 
     public News fromDTO(NewsDTO newsDTO,News news){
         news.setName(newsDTO.getName());
