@@ -16,11 +16,14 @@ public class NewsDTO {
     private String body;
 
 
-    private Date putdate;
+    private Date created;
+
 
     private List<Long> categoriesId;
 
+
     private Set<Category> categories;
+
 
     public Set<Category> getCategories() {
         return categories;
@@ -38,12 +41,12 @@ public class NewsDTO {
         this.idNews = idNews;
     }
 
-    public Date getPutdate() {
-        return putdate;
+    public Date getCreated() {
+        return created;
     }
 
-    public void setPutdate(Date putdate) {
-        this.putdate = putdate;
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
     public String getName() {

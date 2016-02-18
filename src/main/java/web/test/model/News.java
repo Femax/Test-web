@@ -21,7 +21,7 @@ public class News implements Serializable {
     private String body;
 
 
-    private Date putdate;
+    private Date created;
 
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -39,7 +39,6 @@ public class News implements Serializable {
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
     }
-
 
     public Long getId() {
         return id;
@@ -65,12 +64,12 @@ public class News implements Serializable {
         this.body = body;
     }
 
-    public Date getPutdate() {
-        return putdate;
+    public Date getCreated() {
+        return created;
     }
 
-    public void setPutdate(Date putdate) {
-        this.putdate = putdate;
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
     @Override
@@ -79,7 +78,7 @@ public class News implements Serializable {
                 "body='" + body + '\'' +
                         ", idNews=" + id +
                         ", name='" + name + '\'' +
-                        ", putdate=" + putdate
+                        ", created=" + created
                 ;
     }
 
@@ -88,7 +87,7 @@ public class News implements Serializable {
         newsDTO.setIdNews(id);
         newsDTO.setName(name);
         newsDTO.setBody(body);
-        newsDTO.setPutdate(putdate);
+        newsDTO.setCreated(created);
         newsDTO.setCategories(categories);
         return newsDTO;
     }

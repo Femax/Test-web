@@ -3,7 +3,6 @@ package web.test.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.util.Assert;
 import web.test.dao.CategoryRepository;
 import web.test.dao.NewsRepository;
 import web.test.model.Category;
@@ -88,7 +87,7 @@ public class NewsServiceImpl implements NewsService {
     public News fromDTO(NewsDTO newsDTO,News news){
         news.setName(newsDTO.getName());
         news.setBody(newsDTO.getBody());
-        news.setPutdate(newsDTO.getPutdate());
+        news.setCreated(newsDTO.getCreated());
         news.setCategories(new HashSet<>());
         for (Long id : newsDTO.getCategoriesId()) {
             Category category = categoryRepository.findOne(id);

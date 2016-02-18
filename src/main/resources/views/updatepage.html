@@ -21,7 +21,7 @@
     <title></title>
     <script>
         $(function() {
-            $( "#putdate" ).datepicker();
+            $( "#created" ).datepicker();
         });
     </script>
 </head>
@@ -31,7 +31,7 @@
     <form action="/news/update" method="POST" role="form" class="form-horizontal">
         <div class="input-group" style="padding: 10px;">
             <span class="input-group-addon" id="name">Name</span>
-            <input type="text" class="form-control" placeholder="name" name="name" value="{{news.name}}" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" placeholder="name" name="name" value="{{news.name}}" aria-describedby="basic-addon1" required>
         </div>
 
         <div class="form-group" style="padding: 10px;">
@@ -44,7 +44,7 @@
             {% endfor %}
         </div>
         <div class="form-group">
-            <p style="padding:10px;">Date: <input type="text"  name="putdate" id="putdate" value="{{month}}/{{date}}/{{year}}" ></p>
+            <p style="padding:10px;">Date: <input type="text"  name="created" id="created" value="" required></p>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
